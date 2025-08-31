@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aura: Student Mental Health Support</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              // New calming blue-green palette
+              'primary': '#00A896',    // A rich teal
+              'primary-light': '#F0FDF4',// A very light green, almost white
+              'secondary': '#02C39A',  // A brighter minty green
+              'accent': '#007F7F',      // A deep, calming cyan
+              'bg-start': '#D1FFF7',   // Gradient start
+              'bg-end': '#a5f3fc',       // Gradient end
+              'text-heading': '#003D3D', // Very dark, rich cyan for headings
+              'text-body': '#005F5F',    // Dark cyan for body text
+              'text-muted': '#007F7F',   // Muted teal for subtitles
+              
+              // Glassmorphism and Cards
+              'card-bg': 'rgba(255, 255, 255, 0.5)',
+              'card-border': 'rgba(255, 255, 255, 0.7)',
+
+              // Dark theme palette
+              'dark-bg-start': '#0D1A26', // A very dark blue-cyan
+              'dark-bg-end': '#003D3D',   // The existing dark cyan
+              'dark-card-bg': 'rgba(12, 42, 42, 0.5)', // Dark, transparent teal
+              'dark-card-border': 'rgba(0, 168, 150, 0.2)', // Faint accent border
+              'dark-text-heading': '#E0F2F1', // Off-white/light cyan
+              'dark-text-body': '#B2DFDB',    // Lighter cyan
+              'dark-text-muted': '#80CBC4',   // Muted cyan
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.5s ease-in-out',
+              'slide-in': 'slideIn 0.5s ease-in-out',
+              'breathe-light': 'breatheLight 7s ease-in-out infinite',
+              'shimmer': 'shimmer 4s linear infinite',
+              'glow': 'glow 2s ease-in-out infinite alternate',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0', transform: 'scale(0.98)' },
+                '100%': { opacity: '1', transform: 'scale(1)' },
+              },
+               slideIn: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              breatheLight: {
+                '0%, 100%': { opacity: '0.6' },
+                '50%': { opacity: '1' },
+              },
+              shimmer: {
+                '0%': { 'background-position': '200% 0' },
+                '100%': { 'background-position': '-200% 0' },
+              },
+              glow: {
+                'from': { 'drop-shadow': '0 0 10px rgba(0, 168, 150, 0.4)' },
+                'to': { 'drop-shadow': '0 0 20px rgba(2, 195, 154, 0.6)' }
+              }
+            },
+          },
+        },
+      }
+    </script>
+    <script>
+      // On page load, apply theme from localStorage. Default to light.
+      if (localStorage.getItem('aura-theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            /* Generic text colors for dark mode */
+            .dark .text-gray-700 { @apply text-gray-300; }
+            .dark .text-gray-400 { @apply text-gray-500; }
+            .dark .text-red-500 { @apply text-red-400; }
+            .dark .text-red-600 { @apply text-red-400; }
+            .dark .text-red-700 { @apply text-red-400; }
+            .dark .text-red-800 { @apply text-red-300; }
+            .dark .text-green-600 { @apply text-green-400; }
+            .dark .text-green-800 { @apply text-green-300; }
+            .dark .text-blue-700 { @apply text-blue-400; }
+            .dark .text-blue-800 { @apply text-blue-300; }
+            .dark .text-yellow-400 { @apply text-yellow-300; }
+            .dark .text-accent { @apply text-secondary; }
+    
+            /* Generic background colors for dark mode */
+            .dark .bg-white, 
+            .dark .bg-white\/80, 
+            .dark .bg-white\/60, 
+            .dark .bg-white\/50, 
+            .dark .bg-white\/40, 
+            .dark .bg-white\/30 {
+                @apply bg-dark-card-bg;
+            }
+            .dark .bg-gray-200 { @apply bg-gray-800; }
+            .dark .bg-gray-300 { @apply bg-gray-700; }
+            .dark .bg-gray-400 { @apply bg-gray-600; }
+    
+            /* Badge backgrounds */
+            .dark .bg-red-100 { @apply bg-red-900/40; }
+            .dark .bg-green-100 { @apply bg-green-900/40; }
+            .dark .bg-blue-100 { @apply bg-blue-900/40; }
+    
+            /* Hovers */
+            .dark .hover\:bg-accent-light:hover { @apply hover:bg-accent/20; }
+            .dark .hover\:bg-white\/50:hover { @apply hover:bg-dark-card-bg/80; }
+            .dark .hover\:text-red-500:hover { @apply hover:text-red-400; }
+            .dark .hover\:bg-gray-300:hover { @apply hover:bg-gray-700; }
+        }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "recharts": "https://aistudiocdn.com/recharts@^3.1.2",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^11.3.18",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.16.0",
+    "recharts/": "https://aistudiocdn.com/recharts@^3.1.2/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="text-text-body dark:text-dark-text-body">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
